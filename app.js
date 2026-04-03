@@ -52,3 +52,22 @@ function baixarStock(produtoId) {
         return 0;
     });
 }
+
+
+const menuData = {
+    pizzas_medias: [
+        { id: 10, nome: "Pizza Margarida Média", preco: 400 },
+        { id: 11, nome: "Pizza Vegetariana Média", preco: 500 },
+        { id: 18, nome: "Pizza de Camarão Média", preco: 730 }
+    ],
+    refeicoes: [
+        { nome: "1/4 Frango (Arroz, Batata e Salada)", preco: 400 },
+        { nome: "Picanha (Arroz, Batata e Salada)", preco: 1100 },
+        { nome: "Arroz de Marisco", preco: 2900 }
+    ],
+    bebidas: [
+        { nome: "Redbull", preco: 120 },
+        { nome: "Coca-Cola", preco: 70 },
+        { nome: "Sumo de Manga (Natural)", preco: 250 }
+    ]
+};
