@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <title>Painel Admin - Iris Sabores</title>
+    <title>Admin - Iris Sabores</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <button onclick="verRelatorio('diario')">Relatório Diário</button>
-        <button onclick="verStock()">Gestão de Stock</button>
-        <button onclick="criarFuncionario()">Novo Funcionário</button>
-    </nav>
-
-    <section id="dashboard">
-        <div class="card">
-            <h3>Movimentação de Caixa</h3>
-            <p id="total-vendas">Calculando...</p>
-        </div>
+    <div class="admin-panel">
+        <h2>Painel de Gestão Iris Sabores</h2>
         
-        <div class="card">
-            <h3>Stock Crítico (Produtos Acabados)</h3>
-            <ul id="produtos-acabados"></ul>
+        <div class="stats-grid">
+            <div class="card">
+                <h3>💰 Fecho Diário</h3>
+                <p id="total-dia">0,00 MT</p>
+            </div>
+            <div class="card">
+                <h3>📦 Stock Crítico</h3>
+                <ul id="lista-acabados"></ul>
+            </div>
         </div>
-    </section>
 
-    <div id="map" style="height: 400px; width: 100%;"></div>
+        <div id="mapa-entregas" style="height: 300px; background: #eee; margin: 20px 0;">
+            <p style="padding: 100px; text-align: center;">Mapa de Rastreio em Tempo Real</p>
+        </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_AQUI"></script>
-    <script src="admin.js"></script>
+        <button onclick="gerarRelatorio()">Gerar Relatório Mensal</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Use o mesmo firebaseConfig aqui
+        const app = initializeApp(window.firebaseConfig); 
+        const db = getDatabase(app);
+
+        // Monitorar pedidos em tempo real
+        onValue(ref(db, 'pedidos/'), (snapshot) => {
+            const dados = snapshot.val();
+            // Lógica para calcular totais e mostrar no painel
+        });
+    </script>
 </body>
 </html>
