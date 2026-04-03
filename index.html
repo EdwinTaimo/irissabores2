@@ -3,32 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iris Sabores | Menu & Delivery</title>
+    <title>Iris Sabores | Menu</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
 </head>
 <body>
     <header class="apple-header">
         <h1>Iris Sabores</h1>
-        <div class="status-bar">📍 Beira | 📞 878743430</div>
+        <p>📍 Beira | 📞 878743430</p>
     </header>
 
-    <main id="menu-container">
-        <section id="pizzas">
-            <h2>🍕 Pizzas Médias</h2>
-            <div class="item" onclick="fazerPedido('Pizza Margarida Média', 400)">
-                <span>Margarida Média</span> <b>400,00 MT</b>
-            </div>
-            </section>
-    </main>
+    <div id="menu-digital">
+        </div>
 
-    <div id="cart-modal" class="modal">
-        <h3>Finalizar Pedido</h3>
-        <textarea id="obs" placeholder="Ex: Sem cebola, por favor..."></textarea>
-        <button onclick="enviarPedido()">Confirmar Pedido (Passo 1)</button>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    <script src="app.js"></script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWOjopJgrTxH_4-eNRhZKzJGFyUZ4nRYY",
+            authDomain: "irissabores-80c7d.firebaseapp.com",
+            projectId: "irissabores-80c7d",
+            databaseURL: "https://irissabores-80c7d-default-rtdb.firebaseio.com", // Confirme esta URL no seu console
+            storageBucket: "irissabores-80c7d.firebasestorage.app",
+            messagingSenderId: "486192502116",
+            appId: "1:486192502116:web:3ce534b762ff63f3ba1671"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Função para o cliente fazer o pedido
+        window.enviarPedido = (nomeItem, preco) => {
+            const obs = prompt("Alguma observação para o restaurante?");
+            const novoPedidoRef = ref(db, 'pedidos/');
+            const novoPedido = push(novoPedidoRef);
+            
+            set(novoPedido, {
+                item: nomeItem,
+                preco: preco,
+                observacao: obs || "Nenhuma",
+                status: "1_Restaurante", // Passo 1
+                data: new Date().toLocaleString(),
+                rastreio: { lat: 0, lng: 0 }
+            }).then(() => alert("Pedido enviado com sucesso!"));
+        };
+    </script>
 </body>
 </html>
