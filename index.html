@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Sabores | Menu & Delivery</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <header class="apple-header">
+        <h1>Iris Sabores</h1>
+        <div class="status-bar">📍 Beira | 📞 878743430</div>
+    </header>
+
+    <main id="menu-container">
+        <section id="pizzas">
+            <h2>🍕 Pizzas Médias</h2>
+            <div class="item" onclick="fazerPedido('Pizza Margarida Média', 400)">
+                <span>Margarida Média</span> <b>400,00 MT</b>
+            </div>
+            </section>
+    </main>
+
+    <div id="cart-modal" class="modal">
+        <h3>Finalizar Pedido</h3>
+        <textarea id="obs" placeholder="Ex: Sem cebola, por favor..."></textarea>
+        <button onclick="enviarPedido()">Confirmar Pedido (Passo 1)</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
